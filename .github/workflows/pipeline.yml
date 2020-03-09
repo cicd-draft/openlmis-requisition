@@ -1,0 +1,33 @@
+name: stockmanagent-p
+
+on: 
+  push:
+    branches: 
+      - master
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout_code
+      uses: actions/checkout@v1
+
+    - name: Preparation
+      env:
+        NUMBER: ${{ github.run_number }}
+      run: |
+        curl -o .env https://raw.githubusercontent.com/OpenLMIS/openlmis-ref-distro/master/settings-sample.env
+        sed -i '2,7d' build.sh
+
+    - name: Login_repo
+      run: |
+        hostname
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+
+    - name: Build_app_image
+      run: |
+        echo ">>> openlims 方法 <<<"
+        docker-compose -f docker-compose.builder.yml run builder
+        docker-compose -f docker-compose.builder.yml build image
