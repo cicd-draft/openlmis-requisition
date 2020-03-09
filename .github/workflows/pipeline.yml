@@ -23,6 +23,9 @@ jobs:
         echo  '#!/bin/bash' >> build.sh
         echo gradle clean build >> build.sh
         chmod +x build.sh && cat build.sh
+        cat .env| grep MAIL
+        sed -i '/MAIL/d'  .env
+        cat .env| grep MAIL
 
     - name: Login_repo
       run: |
@@ -32,9 +35,9 @@ jobs:
     - name: Build_app
       run: |
         echo ">>> openlims 方法 <<<"
-        docker-compose -f docker-compose.builder.yml run builder
+        #docker-compose -f docker-compose.builder.yml run builder
 
     - name: Build_image
       run: |
         echo ">>> openlims 方法 <<<"
-        docker-compose -f docker-compose.builder.yml build image
+        #docker-compose -f docker-compose.builder.yml build image
