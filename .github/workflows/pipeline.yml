@@ -18,8 +18,11 @@ jobs:
       env:
         NUMBER: ${{ github.run_number }}
       run: |
+        rm build.sh
         curl -o .env https://raw.githubusercontent.com/OpenLMIS/openlmis-ref-distro/master/settings-sample.env
-        sed -i '2,7d' build.sh
+        echo  '#!/bin/bash' >> build.sh
+        echo gradle clean build >> build.sh
+        chmod +x build.sh && cat build.sh
 
     - name: Login_repo
       run: |
