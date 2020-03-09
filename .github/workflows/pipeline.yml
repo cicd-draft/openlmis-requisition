@@ -23,9 +23,9 @@ jobs:
         echo  '#!/bin/bash' >> build.sh
         echo gradle clean build >> build.sh
         chmod +x build.sh && cat build.sh
-        cat .env| grep MAIL
-        sed -i '/MAIL/d'  .env
-        cat .env| grep MAIL
+        cat .env | grep MAIL
+        sed -i '/MAIL/d' .env
+        cat .env | grep -C 5 Notification
 
     - name: Login_repo
       run: |
