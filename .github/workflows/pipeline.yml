@@ -25,7 +25,11 @@ jobs:
         chmod +x build.sh && cat build.sh
         cat .env | grep MAIL
         sed -i '/MAIL/d' .env
-        cat .env | grep -C 5 Notification
+        echo "MAIL_HOST=smtp.gmail.com" >> .env
+        echo "MAIL_PORT=465" >> .env
+        echo "MAIL_USERNAME=tw.siglus.dev@gmail.com" >> .env
+        echo "MAIL_PASSWORD=478F9}}b9x8y75As" >> .env
+        echo "MAIL_ADDRESS=tw.siglus.dev@gmail.com" >> .env
 
     - name: Login_repo
       run: |
@@ -35,7 +39,7 @@ jobs:
     - name: Build_app
       run: |
         echo ">>> openlims 方法 <<<"
-        #docker-compose -f docker-compose.builder.yml run builder
+        docker-compose -f docker-compose.builder.yml run builder
 
     - name: Build_image
       run: |
