@@ -29,8 +29,12 @@ jobs:
         hostname
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
 
-    - name: Build_app_image
+    - name: Build_app
       run: |
         echo ">>> openlims 方法 <<<"
         docker-compose -f docker-compose.builder.yml run builder
+
+    - name: Build_image
+      run: |
+        echo ">>> openlims 方法 <<<"
         docker-compose -f docker-compose.builder.yml build image
