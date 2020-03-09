@@ -48,4 +48,5 @@ jobs:
     - name: Build_image
       run: |
         echo ">>> openlims 方法 <<<"
-        #docker-compose -f docker-compose.builder.yml build image
+        docker-compose -f docker-compose.builder.yml build image
+        docker images
